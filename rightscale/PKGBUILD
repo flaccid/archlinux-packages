@@ -167,6 +167,8 @@ package() {
   mv "$srcdir/tmp/etc" "$srcdir/../pkg/"
   msg "Adding blank directory, /etc/rightscale.d to package."
   mkdir -p "$srcdir/../pkg/etc/rightscale.d"
+  msg "Adding blank directory, /var/spool/cloud to package."
+  mkdir -p "$srcdir/../pkg/var/spool/cloud"
   msg "Setting default cloud to ec2 in /etc/rightscale.d/cloud."
   echo 'ec2' > "$srcdir/../pkg/etc/rightscale.d/cloud"
 }
