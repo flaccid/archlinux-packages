@@ -54,7 +54,7 @@ patch -p0 << 'EOF'
          export RS_DISTRO=suse
          export RS_BASE_OS=suse
          ;;
-+      archlinux*)
++      arch*)
 +        export RS_DISTRO=archlinux
 +        export RS_BASE_OS=archlinux
 +        ;;
