@@ -165,6 +165,10 @@ package() {
   msg "Moving package files into pkg/ directory..."
   mv "$srcdir/tmp/opt" "$srcdir/../pkg/"
   mv "$srcdir/tmp/etc" "$srcdir/../pkg/"
+  msg "Adding blank directory, /etc/rightscale.d to package."
+  mkdir -p "$srcdir/../pkg/etc/rightscale.d"
+  msg "Setting default cloud to ec2 in /etc/rightscale.d/cloud."
+  echo 'ec2' > "$srcdir/../pkg/etc/rightscale.d/cloud"
 }
 
 # vim:set ts=2 sw=2 et:
