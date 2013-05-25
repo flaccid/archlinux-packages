@@ -1,4 +1,5 @@
-# Maintainer: Chris Fordham <chris@xhost.com.au>
+# Maintainer: Chris Fordham <chris.fordham@rightscale.com>
+
 pkgname=rightscale-deb
 pkgver=5.8.12
 pkgrel=1
