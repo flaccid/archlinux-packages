@@ -18,8 +18,7 @@ rg_pkgver=1.6.2
 rg_gitdir="${rg_gitname}-${rg_pkgver}"
 
 groups=()
-depends=(bash dnsutils lsb-release sudo openssh patch git)
-depends=('db>=4.7' 'dnsutils' 'openssl>=0.9.8h-3' 'readline' 'sudo' 'wget' 'zlib')
+depends=('db>=4.7' 'dnsutils' 'openssl>=0.9.8h-3' 'patch' 'readline' 'sudo' 'wget' 'zlib')
 makedepends=('autoconf' 'curl' 'git')
 checkdepends=()
 optdepends=()
