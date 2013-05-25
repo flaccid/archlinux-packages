@@ -1,9 +1,9 @@
 # Maintainer: Chris Fordham <chris@xhost.com.au>
 pkgname=rightscale-deb
-pkgver=5.8.8
+pkgver=5.8.12
 pkgrel=1
 epoch=
-pkgdesc=""
+pkgdesc="RightScale RightLink cloud instance agent."
 arch=('x86_64')
 url="http://rightscale.com/"
 license=('RightScale')
@@ -19,31 +19,21 @@ backup=()
 options=()
 install=rightscale.install
 changelog=
-#source=($pkgname-$pkgver.tar.gz)
+source=(http://mirror.rightscale.com/rightscale_rightlink/5.8.12/ubuntu/rightscale_5.8.12-ubuntu_12.04-amd64.deb)
 noextract=()
-md5sums=() #generate with 'makepkg -g'
+md5sums=('872fd32ec762a1c4cb45b49321341c18')              # generate with 'makepkg -g'
 
 build() {
-  msg "Flushing any previous sources."
-  rm -Rf "$srcdir/tmp" "$srcdir/$pkgname-$pkgver"
-  mkdir -p "$srcdir/$pkgname-$pkgver"
-  
-  msg "No physical build required, using remote binary package as source."
-  
-  mkdir -p "$srcdir/tmp"
-  cd "$srcdir/tmp"
-  
-  msg "Fetching RightScale RightLink debian binary package..."
-  wget http://mirror.rightscale.com/rightscale_rightlink/5.8.8/ubuntu/rightscale_5.8.8-ubuntu_12.04-amd64.deb
+  cd "$srcdir"
   
   msg "Extracting RightScale RightLink debian binary package..."
-  ar x ./rightscale_5.8.8-ubuntu_12.04-amd64.deb
+  ar x "$srcdir/rightscale_5.8.12-ubuntu_12.04-amd64.deb"
   
   msg "Extracting data.tar.gz..."
-  tar zxf ./data.tar.gz
+  tar zxf "$srcdir/data.tar.gz"
   
   #msg "Extracting control.tar.gz..."
-  #tar zxf ./control.tar.gz
+  #tar zxf "$srcdir/control.tar.gz"
   
   msg "Applying patches for Arch Linux compat..."
 
@@ -153,24 +143,18 @@ ExecReload=/bin/bash -c '. /opt/rightscale/etc/init.d/rightscale_functions;  log
 [Install]
 Alias=default.target
 EOF
-
 }   ## end build()
 
 check() {
-  [ -e "$srcdir/tmp/opt/rightscale" ]
+  [ -e "$srcdir/opt/rightscale" ]
+  [ -e "$srcdir/etc" ]
 }
 
 package() {
-  cd "$srcdir/$pkgname-$pkgver"
-  msg "Moving package files into pkg/ directory..."
-  mv "$srcdir/tmp/opt" "$srcdir/../pkg/"
-  mv "$srcdir/tmp/etc" "$srcdir/../pkg/"
-  msg "Adding blank directory, /etc/rightscale.d to package."
-  mkdir -p "$srcdir/../pkg/etc/rightscale.d"
-  msg "Adding blank directory, /var/spool/cloud to package."
-  mkdir -p "$srcdir/../pkg/var/spool/cloud"
-  msg "Setting default cloud to ec2 in /etc/rightscale.d/cloud."
-  echo 'ec2' > "$srcdir/../pkg/etc/rightscale.d/cloud"
+  msg 'Moving /etc into package.'
+  mv "$srcdir/etc" "$pkgdir/"
+  msg 'Moving /opt into package.'
+  mv "$srcdir/opt" "$pkgdir/"
 }
 
 # vim:set ts=2 sw=2 et:
