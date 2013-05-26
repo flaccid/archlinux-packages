@@ -1,96 +1,98 @@
 # Maintainer: Brian Szmyd <brian.szmyd@rightscale.com>
+# Contributor: Chris Fordham <chris.fordham@rightscale.com>
+
 pkgname=rightscale
-_gitname='right_link'
 pkgver=5.8.13
 pkgrel=1
-epoch=
-pkgdesc="RightScale automates servers configuration and monitoring."
-arch=('i686', 'x86_64')
-url="http://rightscale.com/"
-license=('RightScale')
+pkgdesc='RightLink cloud instance agent.'
+arch=(i686 x86_64)
+url=http://rightscale.com/
+license=(MIT RUBY)
+depends=(bash dnsutils sudo)
+makedepends=(autoconf git)
+conflicts=(rightscale-deb)
+options=(emptydirs strip !docs !libtool !staticlibs )
+install=rightscale.install
+
+_gitname=right_link
+_rl_prefix="/opt/rightscale"
 
 # We also install ruby, so here's some details
-rb_gitname=ruby
-rb_pkgver=1.8.7-p371
-rb_gitdir="${rb_gitname}-${rb_pkgver}"
-rg_gitname=rubygems
-rg_pkgver=1.6.2
-rg_gitdir="${rg_gitname}-${rg_pkgver}"
+_sandbox_dir="${_rl_prefix}/sandbox"
+_rb_gitname=ruby
+_rb_pkgver=1.8.7-p371
+_rb_gitdir="${_rb_gitname}-${_rb_pkgver}"
+_rg_gitname=rubygems
+_rg_pkgver=1.6.2
+_rg_gitdir="${_rg_gitname}-${_rg_pkgver}"
 
-groups=()
-depends=('db>=4.7' 'dnsutils' 'openssl>=0.9.8h-3' 'patch' 'readline' 'sudo' 'wget' 'zlib')
-makedepends=('autoconf' 'curl' 'git')
-checkdepends=()
-optdepends=()
-provides=()
-conflicts=()
-replaces=()
-backup=()
-options=()
-install=rightscale.install
+
 source=(
       "${_gitname}::git://github.com/rightscale/right_link.git"
-      "http://ftp.ruby-lang.org/pub/ruby/1.8/${rb_gitname}-${rb_pkgver}.tar.gz"
-      "http://production.cf.rubygems.org/rubygems/${rg_gitname}-${rg_pkgver}.tgz")
-changelog=
-noextract=()
+      "http://ftp.ruby-lang.org/pub/ruby/1.8/${_rb_gitname}-${_rb_pkgver}.tar.gz"
+      "http://production.cf.rubygems.org/rubygems/${_rg_gitname}-${_rg_pkgver}.tgz"
+      ${install})
+
 sha256sums=(
       "SKIP"
       "e60a322f8f2a616eba01651f5ab620e7e48e4f8adfe711aec61cc74a91d54d3c"
-      "cb5261818b931b5ea2cb54bc1d583c47823543fcf9682f0d6298849091c1cea7")
+      "cb5261818b931b5ea2cb54bc1d583c47823543fcf9682f0d6298849091c1cea7"
+      "4599b3982e1887223c1809c56c48d8e571a24b67ec8607e32c399c4471595506")
 
-rl_prefix="/opt/rightscale"
-rightlink_dir="$rl_prefix/right_link"
-sandbox_dir="$rl_prefix/sandbox"
 
 ruby_cmd() {
   # These are some LOAD_PATHs that need to be manually added to ruby
   # since it's not installed in the /opt yet.
-  local lib_paths=$(for path in 1.8 1.8/${CARCH}-linux site_ruby/1.8; do echo "-I${RUBY_LIBS}/ruby/${path}"; done)
+  local lib_paths=$(for path in ${ruby_libs[@]}; do echo "-I${ruby_dir}/lib/ruby/${path}"; done)
 
-  # Same goes for libruby
   RUBYOPT="${lib_paths}" \
-    ${RUBY_BINS}/ruby ${@}
+    ${ruby_dir}/bin/ruby ${@}
 }
 
 build() {
   # Build Ruby
-  pushd ${rb_gitdir}
+  pushd ${_rb_gitdir}
     autoconf
     ./configure \
-      --prefix="${sandbox_dir}" \
+      --prefix="${_sandbox_dir}" \
       --enable-pthread
     make
   popd
 }
 
 package() {
-  RL_STAGE=${pkgdir}/${rightlink_dir}
-  RUBY_STAGE=${pkgdir}/${sandbox_dir}
-  RUBY_LIBS=${RUBY_STAGE}/lib
-  RUBY_BINS=${RUBY_STAGE}/bin
+  ruby_dir=${pkgdir}/${_sandbox_dir}
+  ruby_libs=()
+  local right_link_dir=${pkgdir}/${_rl_prefix}/right_link
+  local license_dir=${pkgdir}/usr/share/license/rightscale
+
+  for new_dir in ${license_dir} ${right_link_dir}; do
+    mkdir -p ${new_dir}
+  done
 
   # Install Ruby
-  pushd ${rb_gitdir}
+  pushd ${_rb_gitdir}
     make DESTDIR=${pkgdir} install
-    install -Dm644 ./COPYING ${RUBY_STAGE}/share
+    ruby_libs+=(1.8 1.8/${CARCH}-linux)
   popd
 
   # Install RubyGems
-  pushd ${rg_gitdir}
+  pushd ${_rg_gitdir}
     ruby_cmd ./setup.rb --no-ri --no-rdoc
-    sed -i "s@${pkgdir}@@" ${RUBY_BINS}/gem
+    ruby_libs+=(site_ruby/1.8)
+    sed -i "s@${pkgdir}@@" ${ruby_dir}/bin/gem
+    ruby_cmd ${ruby_dir}/bin/gem install bundle
   popd
 
   # Install RightLink
   pushd ${_gitname}
-    git checkout v${pkgver}
-    ruby_cmd ${RUBY_BINS}/gem install bundle
-    ruby_cmd ${RUBY_LIBS}/ruby/gems/1.8/bin/bundle install
-    ruby_cmd ${RUBY_BINS}/gem build *.gemspec
-    ruby_cmd ${RUBY_BINS}/gem install *.gem
+    git archive --format=tar v${pkgver} | tar -C ${right_link_dir} -x
   popd
 
+  pushd ${right_link_dir}
+    ruby_cmd ${ruby_dir}/lib/ruby/gems/1.8/bin/bundle install
+    mv ./LICENSE ${license_dir}/license.txt
+  popd
 }
 
 # vim:syntax=sh
