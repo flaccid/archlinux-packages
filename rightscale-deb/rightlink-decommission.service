@@ -1,0 +1,12 @@
+[Unit]
+Description=RightLink decommission on shutdown, poweroff, reboot, system halt
+After=rightscale.service
+Requires=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/rightscale/bin/rightscale_decommission
+TimeoutSec=3600
+
+[Install]
+WantedBy=shutdown.target reboot.target halt.target poweroff.target
