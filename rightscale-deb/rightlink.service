@@ -7,7 +7,7 @@ Conflicts=rightscale-decommission.target
 [Service]
 Type=oneshot
 ExecStart=/opt/rightscale/bin/rightlink_start
-ExecStop=/opt/rightscale/bin/rightlink_start
+ExecStop=/opt/rightscale/bin/rightlink_stop
 ExecReload=/opt/rightscale/bin/rightlink_reload
 
 [Install]
