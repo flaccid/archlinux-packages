@@ -40,7 +40,7 @@ md5sums=('872fd32ec762a1c4cb45b49321341c18'
          '7b30cc847f0371f46f6d036a267b1238'
          '50744b86d5d0f8c644bc297ccf6ab8bd'
          'f40885f17d62aab0254ffadd34fbc694'
-         'c27473aa6b7aa2ec79a87689053ad39e'
+         'de505a95c8a910582c27e5080308670d'
          '03c5f88f12fd2c4a9be028bc6400cf3e'
          'e3c6b5528074cc2ae306ba06fb58f4af'
          '395a1184e1743978b5556cafd671c3c5'
@@ -79,7 +79,7 @@ prepare() {
   mkdir -p "$srcdir/etc/systemd/system"
   cp "$startdir/rightscale.service" "$srcdir/lib/systemd/system/rightscale.service"
   cp "$startdir/rightlink.service" "$srcdir/lib/systemd/system/rightlink.service" 
-  cp "$startdir/rightlink.service" "$srcdir/lib/systemd/system/rightlink-decommission.service" 
+  cp "$startdir/rightlink-decommission.service" "$srcdir/lib/systemd/system/rightlink-decommission.service" 
 }
 
 build() {
