@@ -37,6 +37,8 @@ build() {
 }
 
 package() {
+	cd "$pkgdir"
+	
 	msg 'Adding service files to package...'
 	install -D "$srcdir/$_gitname/rightscale.service" "$pkgdir/usr/lib/systemd/system/rightscale.service"
 	install -D "$srcdir/$_gitname/rightlink.service" "$pkgdir/usr/lib/systemd/system/rightlink.service"
@@ -50,6 +52,9 @@ package() {
 	install -D "$srcdir/$_gitname/bin/rightlink_stop" "$pkgdir/opt/rightscale/bin/rightlink_stop"
 	install -D "$srcdir/$_gitname/bin/rightscale_start" "$pkgdir/opt/rightscale/bin/rightscale_start"
 	install -D "$srcdir/$_gitname/bin/rightscale_stop" "$pkgdir/opt/rightscale/bin/rightscale_stop"
+		
+	msg "Applying patch for rightcale_functions..."
+	patch -p0 < "$startdir/rightscale_functions.patch"
 }
 
 # vim:syntax=sh
