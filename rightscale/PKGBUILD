@@ -95,7 +95,7 @@ package() {
 
   cd "$pkgdir"
   msg "Applying patch for system_configurator.rb..."
-  patch -p0 < "$startdir/system_configurator.patch"
+  patch -p0 < "$startdir/system_configurator.rb.patch"
 }
 
 # vim:syntax=sh
