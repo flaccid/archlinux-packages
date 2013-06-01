@@ -15,12 +15,10 @@ options=()
 source=(
   cloud
 )
-md5sums=()        # generate with 'makepkg -g'
-
-build() {
-}
+md5sums=('d88319dfa5d204f019b4284149886c59')        # generate with 'makepkg -g'
 
 package() {
+	install -D "$startdir/cloud" "$pkgdir/etc/rightscale.d/cloud"
 }
 
 # vim:syntax=sh
