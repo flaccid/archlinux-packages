@@ -2,22 +2,6 @@ pre_install() {
   rm -Rf /opt/rightscale
 }
 
-post_install() {
-  echo .
-}
-
-pre_upgrade() {
-  echo .
-}
-
-post_upgrade() {
-  echo .
-}
-
-pre_remove() {
-  echo .
-}
-
 post_remove() {
   rm -Rf /opt/rightscale
 }
