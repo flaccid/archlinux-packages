@@ -81,7 +81,7 @@ package() {
     ruby_cmd ./setup.rb --no-ri --no-rdoc
     ruby_libs+=(site_ruby/1.8)
     sed -i "s@${pkgdir}@@" ${ruby_dir}/bin/gem
-    ruby_cmd ${ruby_dir}/bin/gem install bundle
+    ruby_cmd ${ruby_dir}/bin/gem install bundle --no-rdoc --no-ri
   popd
 
   # Install RightLink
