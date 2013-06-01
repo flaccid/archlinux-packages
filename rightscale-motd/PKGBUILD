@@ -1,0 +1,28 @@
+# Maintainer: <chris.fordham@rightscale.com>
+
+pkgname=rightscale-motd
+pkgver=0.1.1
+pkgrel=1
+pkgdesc='RightScale RightLink MOTD support package.'
+arch=(any)
+url=http://rightscale.com/
+license=(Apache 2)
+depends=(rightscale)
+makedepends=()
+conflicts=()
+options=()
+
+source=(
+	motd
+	motd-complete
+	motd-failed
+)
+md5sums=()        # generate with 'makepkg -g'
+
+package() {
+	install -D "$startdir/motd" "$pkgdir/opt/rightscale/etc/motd"
+	install -D "$startdir/motd-complete" "$pkgdir/opt/rightscale/etc/motd-complete"
+	install -D "$startdir/motd-failed" "$pkgdir/opt/rightscale/etc/motd-failed"
+}
+
+# vim:syntax=sh
