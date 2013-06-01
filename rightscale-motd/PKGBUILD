@@ -17,7 +17,9 @@ source=(
 	motd-complete
 	motd-failed
 )
-md5sums=()        # generate with 'makepkg -g'
+md5sums=('f6fb1b6dc9242d5683ee4a28e73c9136'
+         '012e1bd444287aa732dca6886b0daa8a'
+         '2d2db6e267df9ad5e5edc575dba7c75b')        # generate with 'makepkg -g'
 
 package() {
 	install -D "$startdir/motd" "$pkgdir/opt/rightscale/etc/motd"
