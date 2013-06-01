@@ -10,7 +10,7 @@ license=(Apache 2)
 install=rightscale-systemd.install
 depends=()
 makedepends=(git patch)
-conflicts=()
+conflicts=(rightscale-sysvinit)
 options=()
 changelog=
 noextract=()
@@ -26,12 +26,13 @@ _gitname=rightscale-systemd
 build() {
 	cd "$srcdir"
 	
-	msg 'Connecting to GIT server...'
+	msg 'Connecting to Git server...'
 	if [ -e "$srcdir/$_gitname" ]; then
 		msg 'Performing a git pull...'
 		cd "$srcdir/$_gitname"
 		git pull
 	else
+		msg 'Performing a git clone...'
 		git clone ${_gitroot}
 	fi
 }
