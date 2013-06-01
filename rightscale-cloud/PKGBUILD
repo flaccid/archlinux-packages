@@ -1,0 +1,26 @@
+# Maintainer: <chris.fordham@rightscale.com>
+
+pkgname=rightscale-cloud
+pkgver=0.1.1
+pkgrel=1
+pkgdesc='RightScale RightLink cloud support package.'
+arch=(any)
+url=http://rightscale.com/
+license=(Apache 2)
+depends=(rightscale)
+makedepends=()
+conflicts=()
+options=()
+
+source=(
+  cloud
+)
+md5sums=()        # generate with 'makepkg -g'
+
+build() {
+}
+
+package() {
+}
+
+# vim:syntax=sh
