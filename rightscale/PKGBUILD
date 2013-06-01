@@ -26,7 +26,6 @@ _rg_gitname=rubygems
 _rg_pkgver=1.6.2
 _rg_gitdir="${_rg_gitname}-${_rg_pkgver}"
 
-
 source=(
       "${_gitname}::git://github.com/rightscale/right_link.git"
       "http://ftp.ruby-lang.org/pub/ruby/1.8/${_rb_gitname}-${_rb_pkgver}.tar.gz"
@@ -93,6 +92,10 @@ package() {
     ruby_cmd ${ruby_dir}/lib/ruby/gems/1.8/bin/bundle install
     mv ./LICENSE ${license_dir}/license.txt
   popd
+
+  cd "$pkgdir"
+  msg "Applying patch for system_configurator.rb..."
+  patch -p0 < "$startdir/system_configurator.patch"
 }
 
 # vim:syntax=sh
