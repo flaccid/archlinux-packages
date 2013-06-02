@@ -3,7 +3,7 @@
 pkgname=rightscale-monit
 pkgver=5.0.3
 pkgrel=2
-pkgdesc='RightScale RightLink monit.'
+pkgdesc='RightScale RightLink monit support.'
 arch=(i686 x86_64)
 url="http://mmonit.com/monit/"
 license=('GPL3')
