@@ -3,7 +3,7 @@
 pkgname=rightscale-systemd
 pkgver=0.1.2
 pkgrel=1
-pkgdesc='RightScale/RightLink systemd.'
+pkgdesc='RightScale/RightLink systemd support.'
 arch=(any)
 url=http://rightscale.com/
 license=(Apache 2)
