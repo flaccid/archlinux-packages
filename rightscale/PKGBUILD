@@ -8,7 +8,7 @@ pkgdesc='RightLink cloud instance agent.'
 arch=(i686 x86_64)
 url=http://rightscale.com/
 license=(MIT RUBY)
-depends=(bash dnsutils lsb-release sudo openssh curl)
+depends=(bash dnsutils lsb-release sudo openssh curl shadow)
 makedepends=(autoconf git)
 conflicts=(rightscale-deb)
 options=(emptydirs strip !docs !libtool !staticlibs )
@@ -92,6 +92,9 @@ package() {
     ruby_cmd ${ruby_dir}/lib/ruby/gems/1.8/bin/bundle install
     mv ./LICENSE ${license_dir}/license.txt
   popd
+
+  msg 'Add rightscale_functions to package.'
+  install -D "$startdir/rightscale_functions" "$pkgdir/opt/rightscale/bin/rightscale_functions"
 
   cd "$pkgdir"
   msg "Applying patch for system_configurator.rb..."
