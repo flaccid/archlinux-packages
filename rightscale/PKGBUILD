@@ -3,7 +3,7 @@
 
 pkgname=rightscale
 pkgver=5.8.13
-pkgrel=2
+pkgrel=3
 pkgdesc='RightScale RightLink cloud instance agent.'
 arch=(i686 x86_64)
 url=http://rightscale.com/
@@ -32,6 +32,7 @@ source=(
 	"http://production.cf.rubygems.org/rubygems/${_rg_gitname}-${_rg_pkgver}.tgz"
 	${install}
 	rightscale_functions
+	system_configurator.rb.patch
 	LICENSE)
 	sha256sums=('SKIP'
 	            'e60a322f8f2a616eba01651f5ab620e7e48e4f8adfe711aec61cc74a91d54d3c'
