@@ -1,8 +1,8 @@
 # Maintainer: Chris Fordham <chris.fordham@rightscale.com>
 
 pkgname=rightscale-systemd
-pkgver=0.1.1
-pkgrel=2
+pkgver=0.1.2
+pkgrel=1
 pkgdesc='RightScale/RightLink systemd.'
 arch=(any)
 url=http://rightscale.com/

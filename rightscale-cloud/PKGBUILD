@@ -1,8 +1,8 @@
 # Maintainer: <chris.fordham@rightscale.com>
 
 pkgname=rightscale-cloud
-pkgver=0.1.1
-pkgrel=2
+pkgver=0.1.2
+pkgrel=1
 pkgdesc='RightScale RightLink cloud support package.'
 arch=(any)
 url=http://rightscale.com/
