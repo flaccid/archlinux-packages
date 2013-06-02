@@ -1,10 +1,7 @@
 eula() {
-	###############################################################################
-	## Notify the user that they must read and agree to the terms of the EULA.
-	###############################################################################
+	# Notify the user that they must read and agree to the terms of the EULA.
 	echo "** By installing this package, you acknowledge that you agree to the End-User"
 	echo "** License Agreement found in /opt/rightscale/LICENSE. If you do not agree to"
-	echo
 }
 
 add_rightscale_user() {
@@ -29,7 +26,12 @@ remove_rightscale_groups() {
 	groupdel rightscale_sudo > /dev/null 2>&1
 }
 
-post_install() {
+recommend_systemd() {
+	echo
+	echo "For system services, install the rightscale-systemd package."
+}
+
+post_setup() {
 	. /opt/rightscale/bin/rightscale_functions
 	init_os_state
 
@@ -43,30 +45,19 @@ post_install() {
 	# TODO: should be covered by install command with files in package
 	chmod -R +x /opt/rightscale/bin/*
 	chmod +x /opt/rightscale/right_link/bin/*
-	
+
 	add_rightscale_user
 	add_rightscale_groups
 	eula
+	recommend_systemd
+}
+
+post_install() {
+	post_setup
 }
 
 post_upgrade() {
-	. /opt/rightscale/bin/rightscale_functions
-	init_os_state
-
-	echo "Installing RightScale command line tools."
-	install_right_link_scripts
-
-	# TODO: install as files in package
-	mkdir -p /var/lib/rightscale/right_link/certs
-	ln -s /var/lib/rightscale/right_link/certs /opt/rightscale/right_link/certs
-
-	# TODO: should be covered by install command with files in package
-	chmod -R +x /opt/rightscale/bin/*
-	chmod +x /opt/rightscale/right_link/bin/*
-
-	add_rightscale_user
-	add_rightscale_groups
-	eula
+	post_setup
 }
 
 post_remove() {
