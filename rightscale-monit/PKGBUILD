@@ -18,7 +18,8 @@ source=(
 	https://s3.amazonaws.com/rightscale-oss-temp/monit-5.0.3.tar.gz					# need to confirm if this is standard monit 5.0.3 from upstream or forked
 	monitrc
 )
-md5sums=('dae7859ec10551fc941daeae60dee9d3')        # generate with 'makepkg -g'
+md5sums=('dae7859ec10551fc941daeae60dee9d3'
+         'ef76b619fe8881e35f2b69c0be4cdd9f')        # generate with 'makepkg -g'
 
 _rs_prefix="/opt/rightscale"
 _sandbox_dir="${_rs_prefix}/sandbox"
