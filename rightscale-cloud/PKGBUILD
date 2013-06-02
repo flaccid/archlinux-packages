@@ -2,12 +2,12 @@
 
 pkgname=rightscale-cloud
 pkgver=0.1.1
-pkgrel=1
+pkgrel=2
 pkgdesc='RightScale RightLink cloud support package.'
 arch=(any)
 url=http://rightscale.com/
 license=(Apache 2)
-depends=(rightscale)
+depends=()
 makedepends=()
 conflicts=()
 options=()
