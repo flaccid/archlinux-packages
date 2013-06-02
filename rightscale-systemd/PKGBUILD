@@ -10,15 +10,12 @@ license=(Apache 2)
 install=rightscale-systemd.install
 depends=(rightscale rightscale-cloud rightscale-motd)
 makedepends=(git patch)
-conflicts=(rightscale-sysvinit)
+conflicts=(rightscale-sysvinit rightscale-deb)
 options=()
 changelog=
 noextract=()
-
-source=(
-  rightscale_functions.patch
-)
-md5sums=('2dc5bba227e7b9e7f66be194a14f82cd')        # generate with 'makepkg -g'
+source=()
+md5sums=()        # generate with 'makepkg -g'
 
 _gitroot=git://github.com/flaccid/rightscale-systemd.git
 _gitname=rightscale-systemd
