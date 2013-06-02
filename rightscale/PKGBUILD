@@ -13,6 +13,19 @@ makedepends=(autoconf git)
 conflicts=(rightscale-deb)
 options=(emptydirs strip !docs !libtool !staticlibs )
 install=rightscale.install
+source=(
+	"${_gitname}::git://github.com/rightscale/right_link.git"
+	"http://ftp.ruby-lang.org/pub/ruby/1.8/${_rb_gitname}-${_rb_pkgver}.tar.gz"
+	"http://production.cf.rubygems.org/rubygems/${_rg_gitname}-${_rg_pkgver}.tgz"
+	${install}
+	rightscale_functions
+	LICENSE)
+	sha256sums=('SKIP'
+	            'e60a322f8f2a616eba01651f5ab620e7e48e4f8adfe711aec61cc74a91d54d3c'
+	            'cb5261818b931b5ea2cb54bc1d583c47823543fcf9682f0d6298849091c1cea7'
+	            '364a255bc0958ca536f1eb5c15fac082df9d5e42013062078f08e4935f0668ee'
+	            '2feb50136512c1563234e415c24e17bda02413b5c5320ee2c371e1c6d23ae127'
+	            '30dadf1285b4d1bc8b3b7951de23c20482e215fc34fcf898a8b05024c1cb3faf')		 # generate with 'makepkg -g'
 
 _gitname=right_link
 _rl_prefix="/opt/rightscale"
@@ -25,19 +38,6 @@ _rb_gitdir="${_rb_gitname}-${_rb_pkgver}"
 _rg_gitname=rubygems
 _rg_pkgver=1.6.2
 _rg_gitdir="${_rg_gitname}-${_rg_pkgver}"
-
-source=(
-	"${_gitname}::git://github.com/rightscale/right_link.git"
-	"http://ftp.ruby-lang.org/pub/ruby/1.8/${_rb_gitname}-${_rb_pkgver}.tar.gz"
-	"http://production.cf.rubygems.org/rubygems/${_rg_gitname}-${_rg_pkgver}.tgz"
-	${install}
-	rightscale_functions
-	LICENSE)
-sha256sums=('SKIP'
-            'e60a322f8f2a616eba01651f5ab620e7e48e4f8adfe711aec61cc74a91d54d3c'
-            'cb5261818b931b5ea2cb54bc1d583c47823543fcf9682f0d6298849091c1cea7'
-            '364a255bc0958ca536f1eb5c15fac082df9d5e42013062078f08e4935f0668ee'
-            '30dadf1285b4d1bc8b3b7951de23c20482e215fc34fcf898a8b05024c1cb3faf')		 # generate with 'makepkg -g'
 
 ruby_cmd() {
   # These are some LOAD_PATHs that need to be manually added to ruby
