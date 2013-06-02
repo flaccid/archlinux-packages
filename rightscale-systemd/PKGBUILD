@@ -2,13 +2,13 @@
 
 pkgname=rightscale-systemd
 pkgver=0.1.1
-pkgrel=1
+pkgrel=2
 pkgdesc='RightScale/RightLink systemd.'
 arch=(any)
 url=http://rightscale.com/
 license=(Apache 2)
 install=rightscale-systemd.install
-depends=(rightscale rightscale-cloud rightscale-motd)
+depends=(rightscale)
 makedepends=(git patch)
 conflicts=(rightscale-sysvinit rightscale-deb)
 options=()
