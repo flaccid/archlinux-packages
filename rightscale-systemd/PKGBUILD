@@ -46,7 +46,6 @@ package() {
 	install -D "$srcdir/$_gitname/rightlink-decommission.service" "$pkgdir/usr/lib/systemd/system/rightlink-decommission.service"
 	
 	msg 'Adding service control scripts to package...'
-	install -D "$srcdir/$_gitname/bin/rightscale_functions" "$pkgdir/opt/rightscale/bin/rightscale_functions"
 	install -D "$srcdir/$_gitname/bin/rightlink_decommission" "$pkgdir/opt/rightscale/bin/rightlink_decommission"
 	install -D "$srcdir/$_gitname/bin/rightlink_reload" "$pkgdir/opt/rightscale/bin/rightlink_reload"
 	install -D "$srcdir/$_gitname/bin/rightlink_start" "$pkgdir/opt/rightscale/bin/rightlink_start"
