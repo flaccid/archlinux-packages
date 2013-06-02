@@ -8,7 +8,7 @@ arch=(any)
 url=http://rightscale.com/
 license=(Apache 2)
 install=rightscale-systemd.install
-depends=()
+depends=(rightscale rightscale-cloud rightscale-motd)
 makedepends=(git patch)
 conflicts=(rightscale-sysvinit)
 options=()
@@ -53,9 +53,6 @@ package() {
 	install -D "$srcdir/$_gitname/bin/rightlink_stop" "$pkgdir/opt/rightscale/bin/rightlink_stop"
 	install -D "$srcdir/$_gitname/bin/rightscale_start" "$pkgdir/opt/rightscale/bin/rightscale_start"
 	install -D "$srcdir/$_gitname/bin/rightscale_stop" "$pkgdir/opt/rightscale/bin/rightscale_stop"
-		
-	msg "Applying patch for rightcale_functions..."
-	patch -p0 < "$startdir/rightscale_functions.patch"
 }
 
 # vim:syntax=sh
