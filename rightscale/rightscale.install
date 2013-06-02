@@ -30,7 +30,7 @@ remove_rightscale_groups() {
 }
 
 post_install() {
-	. /opt/rightscale/etc/init.d/rightscale_functions
+	. /opt/rightscale/bin/rightscale_functions
 	init_os_state
 
 	echo "Installing RightScale command line tools."
@@ -50,7 +50,7 @@ post_install() {
 }
 
 post_upgrade() {
-	. /opt/rightscale/etc/init.d/rightscale_functions
+	. /opt/rightscale/bin/rightscale_functions
 	init_os_state
 
 	echo "Installing RightScale command line tools."
