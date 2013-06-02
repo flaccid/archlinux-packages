@@ -8,7 +8,7 @@ pkgdesc='RightLink cloud instance agent.'
 arch=(i686 x86_64)
 url=http://rightscale.com/
 license=(MIT RUBY)
-depends=(bash dnsutils lsb-release sudo openssh curl shadow)
+depends=(bash dnsutils lsb-release sudo openssh curl shadow rightscale-cloud rightscale-motd)
 makedepends=(autoconf git)
 conflicts=(rightscale-deb)
 options=(emptydirs strip !docs !libtool !staticlibs )
@@ -27,10 +27,11 @@ _rg_pkgver=1.6.2
 _rg_gitdir="${_rg_gitname}-${_rg_pkgver}"
 
 source=(
-      "${_gitname}::git://github.com/rightscale/right_link.git"
-      "http://ftp.ruby-lang.org/pub/ruby/1.8/${_rb_gitname}-${_rb_pkgver}.tar.gz"
-      "http://production.cf.rubygems.org/rubygems/${_rg_gitname}-${_rg_pkgver}.tgz"
-      ${install})
+	"${_gitname}::git://github.com/rightscale/right_link.git"
+	"http://ftp.ruby-lang.org/pub/ruby/1.8/${_rb_gitname}-${_rb_pkgver}.tar.gz"
+	"http://production.cf.rubygems.org/rubygems/${_rg_gitname}-${_rg_pkgver}.tgz"
+	${install}
+	LICENSE)
 sha256sums=('SKIP'
             'e60a322f8f2a616eba01651f5ab620e7e48e4f8adfe711aec61cc74a91d54d3c'
             'cb5261818b931b5ea2cb54bc1d583c47823543fcf9682f0d6298849091c1cea7'
@@ -96,6 +97,9 @@ package() {
   cd "$pkgdir"
   msg "Applying patch for system_configurator.rb..."
   patch -p0 < "$startdir/system_configurator.rb.patch"
+
+  msg 'Adding LICENSE to package...'
+  install -D "$startdir/LICENSE" "$pkgdir/opt/rightscale/LICENSE"
 }
 
 # vim:syntax=sh
