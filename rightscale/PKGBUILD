@@ -35,7 +35,8 @@ source=(
 sha256sums=('SKIP'
             'e60a322f8f2a616eba01651f5ab620e7e48e4f8adfe711aec61cc74a91d54d3c'
             'cb5261818b931b5ea2cb54bc1d583c47823543fcf9682f0d6298849091c1cea7'
-            '715ece73dd90af15db8fb9efb14f9941993ea9b584dd682f68266f465ffed7bb')		 # generate with 'makepkg -g'
+            '364a255bc0958ca536f1eb5c15fac082df9d5e42013062078f08e4935f0668ee'
+            '30dadf1285b4d1bc8b3b7951de23c20482e215fc34fcf898a8b05024c1cb3faf')		 # generate with 'makepkg -g'
 
 ruby_cmd() {
   # These are some LOAD_PATHs that need to be manually added to ruby
