@@ -71,6 +71,12 @@ package() {
 	pushd ${srcdir}
 		ruby_cmd ${ruby_dir}/lib/ruby/gems/1.8/bin/bundle install
 	popd
+	
+	# TODO: find out why; fix in da upstream
+	msg 'Adding in missing gem versions...'
+	ruby_cmd ${ruby_dir}/bin/gem install treetop --version=1.4.10
+	ruby_cmd ${ruby_dir}/bin/gem install right_aws --version=3.0.4
+	ruby_cmd ${ruby_dir}/bin/gem install systemu --version=2.5.1
 }
 
 # vim:syntax=sh
