@@ -19,9 +19,9 @@ source=(
 	rightscale_functions
 	LICENSE)
 
-md5sums=('a75ff6aa92a3c9906aa3c89c312370c4'
-         'd1361b0f17651bc34d918e020550a962'
-         '163c5dac82ec5a27cdfff253d688f405')		 # generate with 'makepkg -g'
+md5sums=('117726d0968dc63cf9db946659942f46'
+         '2fce7dd8caf57b76b3c92a4d18de02e1'
+         '3f31b6f7aba7c235143e0594a7ef1230')		 # generate with 'makepkg -g'
 
 package() {
   msg 'Add rightscale_functions to package.'
