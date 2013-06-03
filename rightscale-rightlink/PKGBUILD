@@ -22,8 +22,8 @@ source=(
 	system_configurator.rb.patch)
 	
 md5sums=('SKIP'
-         '163c5dac82ec5a27cdfff253d688f405'
-         '7238b0ca32d90a3d35406b4236f90fd7')		 # generate with 'makepkg -g'
+         '3f31b6f7aba7c235143e0594a7ef1230'
+         'ea36f42257352c44f5240ed67e36f4fb')		 # generate with 'makepkg -g'
 
 package() {
 	mkdir -p ${pkgdir}/${_rl_prefix}/right_link
