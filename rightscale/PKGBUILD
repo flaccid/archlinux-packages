@@ -3,7 +3,7 @@
 
 pkgname=rightscale
 pkgver=5.8.13
-pkgrel=5
+pkgrel=6
 pkgdesc='RightScale RightLink cloud instance agent.'
 arch=(i686 x86_64)
 url=http://rightscale.com/
