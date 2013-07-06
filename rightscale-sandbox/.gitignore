@@ -1,0 +1,5 @@
+/pkg/
+/src/
+/Gemfile*
+/*.tar.xz
+/*.tgz
