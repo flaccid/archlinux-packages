@@ -1,0 +1,8 @@
+--- Gemfile
++++ Gemfile
+1,2c1,2
+< source 'https://s3.amazonaws.com/rightscale_rightlink_gems_dev'
+< source 'https://rubygems.org'
+---
+> source 'http://s3.amazonaws.com/rightscale_rightlink_gems_dev'
+> source :rubygems

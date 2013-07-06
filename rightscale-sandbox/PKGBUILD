@@ -1,7 +1,9 @@
 # Maintainer: Brian Szmyd <brian.szmyd@rightscale.com>
 # Contributor: Chris Fordham <chris.fordham@rightscale.com>
 
-# VCS: https://github.com/flaccid/archlinux-packages/blob/master/rightscale-sandbox/PKGBUILD
+# VCS files:
+# https://github.com/flaccid/archlinux-packages/blob/master/rightscale-sandbox/PKGBUILD
+# https://github.com/flaccid/archlinux-packages/blob/master/rightscale-sandbox/Gemfile.patch
 
 pkgname=rightscale-sandbox
 pkgver=5.8.13
@@ -55,6 +57,11 @@ build() {
 }
 
 package() {
+  pushd "$startdir"
+    msg "Applying Gemfile patch..."
+    patch -p0 -R < Gemfile.patch
+  popd
+  
 	ruby_dir=${pkgdir}/${_sandbox_dir}
 	ruby_libs=()
 
@@ -77,7 +84,7 @@ package() {
     msg "Modifying shebang in ${ruby_dir}/bin/gem..."
 		sed -i "s@${pkgdir}@@" ${ruby_dir}/bin/gem
 
-    # if bundle/r gems found in user's home, copy them in four use
+    # if bundle/r gems found in user's home, copy them in for use
     shopt -s nullglob dotglob
     for f in $HOME/.gem/ruby/1.8/gems/bundle-*; do
         test -d "$f" || continue
