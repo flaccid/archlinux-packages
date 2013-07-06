@@ -10,7 +10,6 @@ pkgdesc='RightScale RightLink Ruby/RubyGems sandbox.'
 arch=('i686' 'x86_64' 'armv6h')
 url="http://rightscale.com/"
 license=(MIT RUBY)
-depends=()
 makedepends=(autoconf sed tar libxslt)
 conflicts=(rightscale-deb)
 options=(emptydirs strip !docs !libtool !staticlibs )
