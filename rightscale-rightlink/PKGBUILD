@@ -3,7 +3,7 @@
 
 pkgname=rightscale-rightlink
 pkgver=5.8.13
-pkgrel=1
+pkgrel=2
 pkgdesc='RightScale RightLink cloud instance agent.'
 arch=('i686' 'x86_64' 'armv6h')
 url=http://rightscale.com/
@@ -37,7 +37,10 @@ package() {
 	msg "Applying patch for system_configurator.rb..."
 	patch -p0 < "$startdir/system_configurator.rb.patch"
 
-	msg 'Adding LICENSE to package...'
+	msg "Applying patch for server_importer.rb..."
+	patch -p0 -R --no-backup-if-mismatch < "$startdir/server_importer.rb.patch"
+
+  msg 'Adding LICENSE to package...'
 	install -D "$startdir/LICENSE" "$pkgdir/usr/share/rightscale-rightlink/LICENSE"
 }
 
