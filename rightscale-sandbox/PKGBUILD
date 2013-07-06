@@ -1,6 +1,8 @@
 # Maintainer: Brian Szmyd <brian.szmyd@rightscale.com>
 # Contributor: Chris Fordham <chris.fordham@rightscale.com>
 
+# VCS: https://github.com/flaccid/archlinux-packages/blob/master/rightscale-sandbox/PKGBUILD
+
 pkgname=rightscale-sandbox
 pkgver=5.8.13
 pkgrel=2
