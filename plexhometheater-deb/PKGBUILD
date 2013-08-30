@@ -1,0 +1,45 @@
+# Maintainer: Chris Fordham <chris [at] fordham [hyphon] nagy [dot] id [dot] au>
+
+pkgname=plexhometheater-deb
+_pkgname=plexhometheater
+pkgver='0.9.10.1.20.201308101022'
+_pkgver='0.9.10.1.20-201308101022'
+pkgrel=1
+_pkgrel="ubuntu4~raring1"
+pkgdesc="The most awesome Media Center you'll ever need."
+arch=('x86_64')
+url="http://plexapp.com/"
+license=('GPL2')
+makedepends=(binutils tar)
+depends=(libcdio13-deb libboost-thread1.49.0-deb)
+conflicts=(xbmc plexhometheater-git)
+
+_pkg_site="https://launchpad.net"
+_pkg_site_href="~plexapp/+archive/plexht/+build/4866223/+files"
+_pkg_arch=amd64
+
+source=(
+  ${_pkg_site}/${_pkg_site_href}/${_pkgname}_${_pkgver}-${_pkgrel}_${_pkg_arch}.deb
+)
+
+md5sums=('06d0172180aa61cba44676cbb7c03267')        # generate with 'makepkg -g'
+
+prepare() {
+  cd "$srcdir"
+  
+  msg "Extracting debian binary package..."
+  ar x "$srcdir/${_pkgname}_${_pkgver}-${_pkgrel}_${_pkg_arch}.deb"
+  
+  msg "Extracting data.tar.gz..."
+  tar zxf "$srcdir/data.tar.gz"
+  rm "$srcdir/data.tar.gz"
+}
+
+package() {
+  msg 'Copying /opt into package.'
+  cp -R "$srcdir/opt" "$pkgdir/"
+
+  msg 'Copying /usr into package.'
+  cp -R "$srcdir/usr" "$pkgdir/"
+}
+
