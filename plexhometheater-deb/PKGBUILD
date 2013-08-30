@@ -11,7 +11,14 @@ arch=('x86_64')
 url="http://plexapp.com/"
 license=('GPL2')
 makedepends=(binutils tar)
+
 depends=(libcdio13-deb libboost-thread1.49.0-deb)
+# upstream packages that provide these libs still need to be packaged for deps:
+#/usr/lib/libpcre.so.3
+#/usr/lib/libtinyxml.so.2.6.2
+#/usr/lib/libGLEW.so.1.8
+#/usr/lib/libboost_system.so.1.49.0
+
 conflicts=(xbmc plexhometheater-git)
 
 _pkg_site="https://launchpad.net"
