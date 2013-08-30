@@ -1,0 +1,32 @@
+# Maintainer: Chris Fordham <chris [at] fordham [hyphon] nagy [dot] id [dot] au>
+
+pkgname=libcdio13-deb
+pkgver='0.8.13'
+pkgrel=4
+pkgdesc="GNU Compact Disc Input and Control Library."
+arch=('x86_64')
+license=('GPL')
+makedepends=(binutils tar)
+
+source=(
+  http://mirror.pnl.gov/ubuntu//pool/main/libc/libcdio/libcdio13_0.83-4_amd64.deb
+)
+
+md5sums=('10dd340ce695d164461d2936df897646')        # generate with 'makepkg -g'
+
+prepare() {
+  cd "$srcdir"
+  
+  msg "Extracting debian binary package..."
+  ar x "libcdio13_0.83-4_amd64.deb"
+  
+  msg "Extracting data.tar.gz..."
+  tar zxf "$srcdir/data.tar.gz"
+  rm "$srcdir/data.tar.gz"
+}
+
+package() {
+   msg 'Copying /usr into package.'
+  cp -R "$srcdir/usr" "$pkgdir/"
+}
+
