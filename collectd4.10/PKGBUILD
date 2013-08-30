@@ -1,0 +1,50 @@
+# $Id$
+# Maintainer: Chris Fordham <chris.fordham@rightscale.com>
+
+pkgname=collectd
+pkgver=4.1.0
+pkgrel=1
+pkgdesc='Daemon which collects system performance statistics periodically'
+url='http://collectd.org/'
+arch=('i686' 'x86_64')
+license=('GPL')
+
+makedepends=()
+
+depends=()
+
+source=("${url}files/${pkgname}-${pkgver}.tar.gz"
+        'service')
+
+sha1sums=('87f27281eb2f44c3e7d8bc721f13c30d062eb382'
+          '15ce2e44dcbecdd32bd09efa1764fbb8d826e423')
+
+backup=('etc/collectd.conf')
+options=('!libtool')
+
+prepare() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	#autoconf
+	sed 's/-Werror//g' -i src/Makefile.in
+}
+
+build() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
+		--sbindir=/usr/bin \
+		--disable-static \
+		--with-python=/usr/bin/python2
+	make
+  make install
+}
+
+package() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	make DESTDIR="${pkgdir}" install
+	#rmdir "${pkgdir}/var/run" # FS#30201
+	install -Dm644 ../service "${pkgdir}"/usr/lib/systemd/system/collectd.service
+	install -Dm644 contrib/collectd2html.pl "${pkgdir}"/usr/share/collectd/collectd2html.pl
+}
