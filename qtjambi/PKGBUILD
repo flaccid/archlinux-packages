@@ -1,0 +1,33 @@
+# Maintainer: Chris Fordham <chris at fordham-nagy dot id dot au> aka flaccid
+# Contributor: Ferrazzo Riccardo <f.riccardo87@gmail.com>
+# Package Source: https://github.com/flaccid/archlinux-packages/blob/master/qtjambi/PKGBUILD
+
+pkgname=qtjambi
+pkgver=4.6.3
+pkgrel=1
+arch=('i686' 'x86_64')
+pkgdesc="The Qt library made available to Java."
+url="http://qt-jambi.org/"
+license=('LGPLv3')
+depends=('java-environment' 'libpng12')
+conflicts=('qtjambi-beta')
+replaces=('qtjambi-beta')
+
+_os='linux'
+_arch='32'
+[ ${CARCH} = 'x86_64' ] && _arch='64'
+
+source=("http://downloads.sourceforge.net/${pkgname}/${pkgname}-${_os}${_arch}-community-${pkgver}.tar.gz")
+sha1sums=('2665b0928bf9890b3fc64d83e93a6608bbf292be')
+[ ${CARCH} = 'x86_64' ] && sha1sums[0]='7d492d0181ed98801feec0588324df95f5aff028'
+
+package() {
+  install -d ${pkgdir}/opt/${pkgname}
+  cp -ar "${pkgname}-linux${_arch}-community-${pkgver}" "${pkgdir}/opt/${pkgname}"
+
+  install -d "${pkgdir}/usr/share/java/${pkgname}"
+
+  for j in *.jar; do
+    ln -s "${pkgdir}/usr/share/java/${pkgname}/$j" "${pkgdir}/usr/share/java/${pkgname}"
+  done
+}
