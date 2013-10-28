@@ -2,7 +2,7 @@
 
 pkgname=ruby-jruby-openssl
 _gemname=jruby-openssl
-pkgver=0.8.8
+pkgver=0.9.4
 pkgrel=1
 pkgdesc="JRuby-OpenSSL is an add-on gem for JRuby that emulates the Ruby OpenSSL native library."
 arch=(any)
