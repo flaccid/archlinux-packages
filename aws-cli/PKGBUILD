@@ -30,13 +30,13 @@ package() {
   python setup.py install --root="$pkgdir/" --optimize=1
 
   msg 'Install Zsh completion script.'
-	install -D -m644 "$srcdir/$pkgname-$pkgver/bin/aws_zsh_completer.sh" "$pkgdir/etc/zsh/aws_complete.zsh"
+  install -D -m644 "$srcdir/$pkgname-$pkgver/bin/aws_zsh_completer.sh" "$pkgdir/etc/zsh/aws_complete.zsh"
 
   msg 'Install requirements.txt.'
-	install -D -m644 "$srcdir/$pkgname-$pkgver/requirements.txt" "$pkgdir/usr/share/doc/$pkgname/requirements.txt"
+  install -D -m644 "$srcdir/$pkgname-$pkgver/requirements.txt" "$pkgdir/usr/share/doc/$pkgname/requirements.txt"
 
   msg 'Install LICENSE.'
-	install -D -m644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -D -m644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
 
 # vim:set ts=2 sw=2 et:
