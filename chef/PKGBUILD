@@ -2,6 +2,8 @@
 # Contributor: Alfredo Palhares <masterkorp@masterkorp.net>
 # Package Source: https://github.com/flaccid/archlinux-packages/blob/master/chef/PKGBUILD
 
+# Note: chef depends on ruby-mime-types < 2.0, so either install mime-types 1.25 gem manually or via https://github.com/flaccid/archlinux-packages/blob/master/ruby-mime-types/PKGBUILD
+
 _gemname=chef
 pkgname=chef
 pkgver=11.8.0
