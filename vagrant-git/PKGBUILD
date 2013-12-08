@@ -1,0 +1,38 @@
+# Maintainer: gtmanfred
+# Contributor: Chris Fordham <chris [at] fordham [hyphon] nagy [dot] id [dot] au> aka flaccid
+# Package Source: https://github.com/flaccid/archlinux-packages/blob/master/vagrant-git/PKGBUILD
+
+pkgname=vagrant-git
+_pkgname=vagrant
+pkgver=1.4.0.dev
+pkgrel=2
+pkgdesc="Vagrant is a tool for building and distributing working environments."
+arch=('i686' 'x86_64')
+url="http://vagrantup.com/"
+license=('MIT')
+depends=('ruby' 'ruby-ffi' 'ruby-childprocess' 'ruby-erubis'
+        'ruby-i18n' 'ruby-log4r' 'ruby-net-ssh' 'ruby-net-scp')
+conflicts=('vagrant')
+replaces=('vagrant')
+makedepends=('git')
+source=('git://github.com/mitchellh/vagrant.git')
+md5sums=('SKIP')
+
+pkgver(){
+  $srcdir/$_pkgname/bin/vagrant -v | sed 's/Vagrant //'
+}
+
+build() {
+  cd $srcdir/vagrant
+  gem build vagrant.gemspec
+}
+
+package() {
+  cd $srcdir/vagrant
+  local _gemdir="$(ruby -rubygems -e'puts Gem.default_dir')"
+  gem install --no-user-install --ignore-dependencies -i "$pkgdir$_gemdir" -n "$pkgdir/usr/bin" \
+    "$_pkgname-$pkgver.gem"
+  install -D -m644 LICENSE "$pkgdir/usr/share/licenses/$_gitname/LICENSE"
+}
+
+# vim:set ts=2 sw=2 et:
