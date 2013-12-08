@@ -9,7 +9,7 @@ _eclipse_timestamp=201202080800
 
 pkgname=eclipse-java
 pkgver=4.3.1
-pkgrel=2
+pkgrel=3
 pkgdesc="Eclipse IDE for Java Developers (present release)."
 arch=('i686' 'x86_64')
 url="http://www.eclipse.org/"
