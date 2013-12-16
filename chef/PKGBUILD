@@ -9,6 +9,9 @@
 #    2) with https://github.com/flaccid/archlinux-packages/blob/master/ruby-mime-types/PKGBUILD
 # If installed by pacman package add ruby-mime-types to IgnorePkg in /etc/pacman.conf
 # (so it is not upgraded with the official repos)
+#
+# Additionally, Chef is behind with net-ssh-multi, apply the same method and install 1.1(.0) from
+#   https://github.com/flaccid/archlinux-packages/blob/master/ruby-net-ssh-multi/PKGBUILD
 
 _gemname=chef
 pkgname=chef
