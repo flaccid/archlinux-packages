@@ -1,0 +1,27 @@
+# Maintainer: Chris Fordham <chris at fordham-nagy dot id dot au> aka flaccid
+# Package Source: https://github.com/flaccid/archlinux-packages/blob/master/ruby-net-ssh-multi/PKGBUILD
+
+_gemname=net-ssh-multi
+_gemver=1.1
+pkgname="ruby-$_gemname"
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="Control multiple Net::SSH connections via a single interface; old version required for Chef."
+arch=(any)
+url="https://github.com/net-ssh/net-scp"
+license=('MIT')
+depends=(ruby)
+makedepends=(rubygems)
+source=(http://gems.rubyforge.org/gems/$_gemname-$_gemver.gem)
+noextract=($_gemname-$_gemver.gem)
+md5sums=('d6b69063f55b8eacea5eca6d9f3966eb')
+
+package() {
+  cd "$srcdir"
+
+  local _gemdir="$(ruby -rubygems -e'puts Gem.default_dir')"
+
+  gem install --no-user-install --ignore-dependencies -i "$pkgdir$_gemdir" -n "$pkgdir/usr/bin" "$_gemname-$_gemver.gem"
+}
+
+# vim:set ts=2 sw=2 et:
