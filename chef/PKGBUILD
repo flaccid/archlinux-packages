@@ -12,6 +12,9 @@
 #
 # Additionally, Chef is behind with net-ssh-multi, apply the same method and install 1.1(.0) from
 #   https://github.com/flaccid/archlinux-packages/blob/master/ruby-net-ssh-multi/PKGBUILD
+#
+# Also, install a version of the puma gem <2.0.0:
+#   # gem install puma --version=1.6.3
 
 _gemname=chef
 pkgname=chef
@@ -37,7 +40,7 @@ depends=('ruby'
   'ruby-net-ssh-multi>=1.1.0'
   'ohai>=6.0.0'
   'pry>=0.9.0'
-  'puma>=1.6.0'
+  'puma<2.0.0'
   'ruby-rest-client>=1.0.4'
   'ruby-yajl-ruby>=1.1.0'
 )
