@@ -1,7 +1,0 @@
-/pkg/
-/src/
-/Gemfile
-/Gemfile.lock
-/Gemfile.orig
-/*.tar.xz
-/*.tgz
