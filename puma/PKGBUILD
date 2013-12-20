@@ -3,9 +3,9 @@
 
 _gemname=puma
 pkgname="$_gemname"
-pkgver=2.6.0
+pkgver=1.6.0
 pkgrel=1
-pkgdesc="Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications."
+pkgdesc="Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications. This is version 1.6.0 required by chef in AUR."
 arch=(any)
 url="http://puma.io/"
 license=('BSD')
