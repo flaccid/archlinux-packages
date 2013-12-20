@@ -1,5 +1,5 @@
 # Maintainer: Chris Fordham <chris at fordham-nagy dot id dot au> aka flaccid
-# Package Source: https://github.com/flaccid/archlinux-packages/blob/master/ruby-mimetypes/PKGBUILD
+# Package Source: https://github.com/flaccid/archlinux-packages/blob/master/ruby-mime-types/PKGBUILD
 
 _gemname=mime-types
 pkgname="ruby-$_gemname"
