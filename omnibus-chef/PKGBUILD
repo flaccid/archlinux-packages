@@ -1,7 +1,7 @@
 # Maintainer: Chris Fordham <chris at fordham-nagy dot id dot au> aka flaccid
 # Package Source: https://github.com/flaccid/archlinux-packages/blob/master/omnibus-chef/PKGBUILD
 
-# omnibus-chef uses directories under system locations such as /opt and /var making user builds impossible :()
+# omnibus-chef uses directories under system locations such as /opt and /var making user builds impossible :(
 # you will need to build the package with something like, sudo makepkg -s -f --asroot
 
 pkgname=omnibus-chef
