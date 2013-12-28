@@ -12,6 +12,7 @@ installer_msg() {
       echo "Chef installation complete. The omnibus-chef package can now be removed if desired."
     ;;
   esac
+  echo
 }
 
 post_install() {
