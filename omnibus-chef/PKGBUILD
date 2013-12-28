@@ -7,15 +7,19 @@
 pkgname=omnibus-chef
 pkgver=11.6.2
 _chefver=11.8.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Omnibus packaging for Opscode Chef (provides a makeself installer for Chef $_chefver)."
 arch=(any)
 url="https://github.com/opscode/omnibus-chef"
 license=('Apache 2.0')
-makedepends=(git patch ruby-bundler)
-source=("$pkgname"::'git://github.com/opscode/omnibus-chef.git')
-md5sums=('SKIP')
 install="$pkgname.install"
+makedepends=(git patch ruby-bundler)
+source=(
+  "$pkgname"::'git://github.com/opscode/omnibus-chef.git'
+  fix-openssl-docs-with-perl-5.18.patch
+)
+md5sums=('SKIP'
+         'cb3bbee72fac7923290514d0e01686de')
 
 pkgver() {
   echo "$pkgver"
