@@ -1,7 +1,7 @@
 # $Id$
 # Maintainer: Chris Fordham <chris at fordham-nagy dot id dot au> aka flaccid
 # Contributor: Brian Szmyd <brian.szmyd@rightscale.com>
-# Package Source: # https://github.com/flaccid/archlinux-packages/blob/master/rightscale-sandbox/PKGBUILD
+# Package Source: https://github.com/flaccid/archlinux-packages/blob/master/rightlink-sandbox/PKGBUILD
 
 pkgname=rightlink-sandbox
 pkgver=5.9.5
