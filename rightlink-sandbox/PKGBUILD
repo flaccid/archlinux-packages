@@ -91,7 +91,7 @@ package() {
   done
 
   pushd ${srcdir}
-    msg 'Displaying package's gem environment.'
+    msg "Displaying package's gem environment."
     ruby_cmd ${ruby_dir}/bin/gem env
     msg 'Performing bundle package...'
     sed -i 's/gemspec/#gemspec/' "$srcdir/Gemfile"      # not sure why this is needed
@@ -100,9 +100,9 @@ package() {
   
   # TODO: find out why; fix in da upstream
   msg 'Adding in missing gem versions...'
-  ruby_cmd ${ruby_dir}/bin/gem install right_link --version="$pkgver" "$rg_install_opts"
-  ruby_cmd ${ruby_dir}/bin/gem install trollop --version=2.0 "$rg_install_opts"
-  ruby_cmd ${ruby_dir}/bin/gem install encryptor --version=1.1.3 "$rg_install_opts"
+  ruby_cmd ${ruby_dir}/bin/gem install right_link --version="$pkgver" "$_rg_install_opts"
+  ruby_cmd ${ruby_dir}/bin/gem install trollop --version=2.0 "$_rg_install_opts"
+  ruby_cmd ${ruby_dir}/bin/gem install encryptor --version=1.1.3 "_$rg_install_opts"
 }
 
 # vim:syntax=sh
