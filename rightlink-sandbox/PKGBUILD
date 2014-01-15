@@ -5,7 +5,7 @@
 
 pkgname=rightlink-sandbox
 pkgver=5.9.5
-pkgrel=5
+pkgrel=8
 pkgdesc='RightScale RightLink Ruby/RubyGems sandbox.'
 arch=('i686' 'x86_64' 'armv6h')
 url="https://github.com/rightscale/right_link/"
@@ -101,7 +101,20 @@ package() {
     
     msg 'Installing right_link gem...'
     ruby_cmd ${ruby_dir}/bin/gem install "$srcdir/right_link-$pkgver/pkg/right_link-$pkgver.gem"
-
+    # omg, why !?
+    if [ -e "$HOME/.gem/ruby/1.8/gems/right_link-5.9.5" ]; then
+      cp -R "$HOME/.gem/ruby/1.8/gems/right_link-5.9.5" ${pkgdir}/${_sandbox_dir}/lib/ruby/gems/1.8/gems/
+      cp -R "$HOME/.gem/ruby/1.8/specifications/right_link-5.9.5.gemspec" ${pkgdir}/${_sandbox_dir}/lib/ruby/gems/1.8/specifications/
+    fi
+    if [ -e "$HOME/.gem/ruby/1.8/gems/trollop-2.0" ]; then
+      cp -R "$HOME/.gem/ruby/1.8/gems/trollop-2.0" ${pkgdir}/${_sandbox_dir}/lib/ruby/gems/1.8/gems/
+      cp -R "$HOME/.gem/ruby/1.8/specifications/trollop-2.0.gemspec" ${pkgdir}/${_sandbox_dir}/lib/ruby/gems/1.8/specifications/
+    fi
+    if [ -e "$HOME/.gem/ruby/1.8/gems/encryptor-1.1.3" ]; then
+      cp -R "$HOME/.gem/ruby/1.8/gems/encryptor-1.1.3" ${pkgdir}/${_sandbox_dir}/lib/ruby/gems/1.8/gems/
+      cp -R "$HOME/.gem/ruby/1.8/specifications/encryptor-1.1.3.gemspec" ${pkgdir}/${_sandbox_dir}/lib/ruby/gems/1.8/specifications/
+    fi
+    
     # TODO: find out why and fix the voodoo
     msg 'Removing illegal alien gems...'
     ruby_cmd ${ruby_dir}/bin/gem uninstall erubis --version=2.7.0
