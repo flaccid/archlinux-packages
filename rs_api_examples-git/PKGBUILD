@@ -4,8 +4,8 @@
 
 pkgname=rs_api_examples-git
 _gitname=rs_api_examples
-pkgver=20140131
-pkgrel=1
+pkgver=r198.0f2ecbe
+pkgrel=2
 pkgdesc="A simple set of example sh/bash scripts for using the RightScale API."
 arch=('any')
 url="https://github.com/flaccid/rs_api_examples"
@@ -18,7 +18,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_gitname"
-  git log -1 --format="%cd" --date=short | sed 's|-||g'
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 package() {
