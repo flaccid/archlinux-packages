@@ -1,16 +1,17 @@
+# $Id$
 # Maintainer: Brian Szmyd <brian.szmyd@rightscale.com>
 # Contributor: Chris Fordham <chris.fordham@rightscale.com>
 
-# VCS files:
+# Package Source:
 # https://github.com/flaccid/archlinux-packages/blob/master/rightscale-sandbox/PKGBUILD
 # https://github.com/flaccid/archlinux-packages/blob/master/rightscale-sandbox/Gemfile.patch
 
 pkgname=rightscale-sandbox
-pkgver=5.8.13
-pkgrel=2
+pkgver=5.9.5
+pkgrel=1
 pkgdesc='RightScale RightLink Ruby/RubyGems sandbox.'
 arch=('i686' 'x86_64' 'armv6h')
-url="http://rightscale.com/"
+url="https://github.com/rightscale/right_link/"
 license=(MIT RUBY)
 makedepends=(autoconf sed tar libxslt)
 conflicts=(rightscale-deb)
@@ -33,8 +34,8 @@ source=(
 )
 md5sums=('653f07bb45f03d0bf3910491288764df'
          '0c95a9869914ba1a45bf71d3b8048420'
-         '4b5390466bf243d74976e9ba2c2c6938'
-         'affe4a7a960e633971deece667248504')		 # generate with 'makepkg -g'
+         'fb225f42a80610de2b156ec683757ca9'
+         '72a42050d24221c82939a4b8e8f5493e')
 
 ruby_cmd() {
   # These are some LOAD_PATHs that need to be manually added to ruby
@@ -109,3 +110,4 @@ package() {
 }
 
 # vim:syntax=sh
+
