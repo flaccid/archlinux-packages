@@ -1,0 +1,3 @@
+[submodule "rightscale-control/right_link_package"]
+	path = rightscale-control/right_link_package
+	url = https://github.com/rightscale/right_link_package.git
