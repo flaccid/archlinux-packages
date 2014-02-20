@@ -1,0 +1,29 @@
+# Maintainer: Chris Fordham <chris at fordham-nagy dot id dot au>
+
+_gemname=meez
+pkgname="$_gemname"
+pkgver=0.1.1
+pkgrel=1
+pkgdesc="'Meez' (slang for 'mise en place') will create an opinionated chef cookbook skeleton complete with testing suite including: berkshelf, chefspec, test kitchen, strainer, foodcritic, server spec."
+arch=(any)
+url="https://github.com/paulczar/meez"
+license=('Apache 2.0')
+depends=(
+  #'chef'           # we don't depend on a particular chef package due to potential version conflicts
+  'ruby-berkshelf'
+  'ruby-bundler'
+  'ruby-test-kitchen'
+)
+makedepends=(rubygems)
+source=(http://gems.rubyforge.org/gems/$_gemname-$pkgver.gem)
+noextract=($_gemname-$pkgver.gem)
+md5sums=('380c2abffced53b536885fe88f5ef737')
+
+package() {
+  cd "$srcdir"
+  local _gemdir="$(ruby -rubygems -e'puts Gem.default_dir')"
+  gem install --no-user-install --ignore-dependencies -i "$pkgdir$_gemdir" -n "$pkgdir/usr/bin" \
+    "$_gemname-$pkgver.gem"
+}
+
+# vim:set ts=2 sw=2 et:
