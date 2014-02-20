@@ -2,17 +2,17 @@
 
 _gemname=octokit
 pkgname=ruby-$_gemname
-pkgver=2.4.0
+pkgver=2.7.1
 pkgrel=1
-pkgdesc="Simple wrapper for the GitHub API"
+pkgdesc="Simple wrapper for the GitHub API."
 arch=(any)
 url="https://github.com/octokit/octokit.rb"
 license=('MIT')
-depends=(ruby-sawyer) # Full dependency information is available in the yaml specification
+depends=(ruby-sawyer)
 makedepends=(rubygems)
 source=(http://gems.rubyforge.org/gems/$_gemname-$pkgver.gem)
 noextract=($_gemname-$pkgver.gem)
-md5sums=('25c0d420e0b664aadf9f2625ba76f43a')
+md5sums=('57ef61e38f8731227dc01c7387b0db12')
 
 package() {
   cd "$srcdir"
