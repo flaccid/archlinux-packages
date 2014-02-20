@@ -19,7 +19,9 @@ md5sums=('a7cbe824f57e9486d62bd73695f935a8')
 package() {
   cd "$srcdir"
   local _gemdir="$(ruby -rubygems -e 'puts Gem.default_dir')"
-  gem install --no-user-install --ignore-dependencies -i "$pkgdir$_gemdir" $_gemname-$pkgver.gem
+  
+  gem install --no-user-install --ignore-dependencies -i "$pkgdir$_gemdir" -n "$pkgdir/usr/bin" \
+    "$_gemname-$pkgver.gem"
 }
 
 # vim:set ts=2 sw=2 et:
