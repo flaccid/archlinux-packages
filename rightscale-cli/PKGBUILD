@@ -1,0 +1,30 @@
+# Maintainer: Chris Fordham <chris at fordham-nagy dot id dot au> aka flaccid
+
+pkgname=rightscale-cli
+_gemname=rightscale-cli
+pkgver=0.5.6
+pkgrel=1
+pkgdesc="RightScale command line interface client."
+arch=(any)
+url="https://github.com/flaccid/rightscale-cli"
+license=('Apache 2.0')
+depends=(
+  'ruby'
+  'ruby-activesupport'
+  'ruby-builder'
+  'ruby-json'
+  'ruby-nokogiri'
+  'ruby-octokit'
+  'ruby-right_api_client'
+  'ruby-thor'
+)
+makedepends=('rubygems')
+source=(http://rubygems.org/downloads/$_gemname-$pkgver.gem)
+noextract=($_gemname-$pkgver.gem)
+md5sums=('6b66c5523cd632695b9a81cc752131ca')
+
+package() {
+  cd "$srcdir"
+  local _gemdir="$(ruby -rubygems -e 'puts Gem.default_dir')"
+  gem install --no-user-install --ignore-dependencies -i "$pkgdir$_gemdir" $_gemname-$pkgver.gem
+}
