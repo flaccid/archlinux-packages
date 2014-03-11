@@ -3,7 +3,7 @@
 _gemname=powerpack
 pkgname="ruby-$_gemname"
 pkgver=0.0.9
-pkgrel=1
+pkgrel=2
 pkgdesc="A few useful extensions to core Ruby classes."
 arch=(any)
 url="https://github.com/bbatsov/powerpack"
