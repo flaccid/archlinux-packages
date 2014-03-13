@@ -4,14 +4,23 @@
 
 pkgname=vagrant-git
 _pkgname=vagrant
-pkgver=1.4.0.dev
-pkgrel=2
+pkgver=1.5.0.dev
+pkgrel=1
 pkgdesc="Vagrant is a tool for building and distributing working environments."
 arch=('i686' 'x86_64')
 url="http://vagrantup.com/"
 license=('MIT')
-depends=('ruby' 'ruby-ffi' 'ruby-childprocess' 'ruby-erubis'
-        'ruby-i18n' 'ruby-log4r' 'ruby-net-ssh' 'ruby-net-scp')
+depends=(
+  'ruby'
+  'ruby-ffi'
+  'ruby-childprocess'
+  'ruby-erubis'
+  'ruby-i18n'
+  'ruby-listen'
+  'ruby-log4r<1.1.11'
+  'ruby-net-ssh'
+  'ruby-net-scp'
+)
 conflicts=('vagrant')
 replaces=('vagrant')
 makedepends=('git')
@@ -19,7 +28,7 @@ source=('git://github.com/mitchellh/vagrant.git')
 md5sums=('SKIP')
 
 pkgver(){
-  $srcdir/$_pkgname/bin/vagrant -v | sed 's/Vagrant //'
+  cat $srcdir/$_pkgname/version.txt
 }
 
 build() {
