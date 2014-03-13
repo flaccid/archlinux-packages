@@ -1,0 +1,6 @@
+/pkg/
+/src/
+/vagrant/
+*.gem
+*.tar.gz
+*.pkg.tar.xz
