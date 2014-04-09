@@ -67,8 +67,8 @@ build() {
 
 package() {
   install -m755 -d "$pkgdir/usr/local/sbin"
-  cp -v "$srcdir/$pkgname"/pkg/chef-* "$pkgdir/usr/local/sbin/"
-  rm -f "$srcdir/$pkgname"/pkg/chef-*.metadata.json
+  cp -v "$srcdir/$_pkgname"/pkg/chef-* "$pkgdir/usr/local/sbin/"
+  rm -f "$srcdir/$_pkgname"/pkg/chef-*.metadata.json
   cd "$pkgdir/usr/local/sbin" && ln -sv ./chef-${CHEF_VERSION}_0.arch.$(uname -r).sh ./chef-installer
 }
 
