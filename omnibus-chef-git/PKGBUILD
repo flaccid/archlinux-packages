@@ -59,10 +59,10 @@ prepare() {
 }
 
 build() {
-  cd "$srcdir/$_pkgname"
-
-  msg "Building omnibus chef (version $CHEF_VERSION)..."
-  bundle exec omnibus build project chef
+  pushd "$srcdir/$_pkgname"
+    msg "Building omnibus chef (version $CHEF_VERSION)..."
+    bundle exec omnibus build project chef
+  popd
 }
 
 package() {
