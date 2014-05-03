@@ -12,7 +12,7 @@
 
 pkgname=omnibus-chef-git
 _pkgname=omnibus-chef
-pkgver=11.6.0.r171.g448c687
+pkgver=11.6.0.r200.g73130ce
 _chefver=11.12.0
 pkgrel=1
 pkgdesc="Omnibus packaging for Opscode Chef (provides a Makeself installer for Chef $_chefver)."
