@@ -18,7 +18,7 @@
 
 _gemname=chef
 pkgname=chef
-pkgver=11.10.4
+pkgver=11.14.2
 pkgrel=1
 pkgdesc="A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure."
 arch=(any)
@@ -49,7 +49,7 @@ conflicts=(ruby-chef)
 replaces=(ruby-chef)
 source=(http://gems.rubyforge.org/gems/$_gemname-$pkgver.gem)
 noextract=($_gemname-$pkgver.gem)
-md5sums=('f16466d7d04ce715ab26512d1debf4e0')
+md5sums=('9eac2363456e27b02b2ad753d5b92085')
 
 package() {
   cd "$srcdir"
