@@ -33,4 +33,4 @@ package()
 	cp -R "$srcdir/nixnote2/usr" "$pkgdir/"
 }
 
-# vim:set ts= 2 sw=2 Et:
+# vim:set ts=2 sw=2 Et:
