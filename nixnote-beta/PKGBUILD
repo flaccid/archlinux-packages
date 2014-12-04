@@ -23,7 +23,8 @@ depends=(
   'tidyhtml'
   'qtwebkit'
 )
-conflicts=(nixnote)
+provides=(nixnote2)
+conflicts=(nixnote nixnote2-git)
 replaces=(nixnote)
 md5sums=('8a34f643665ac67e839a5b3545c23bfb')
 source="http://sourceforge.net/projects/nevernote/files/${_pkgver}/${_pkgname}-${pkgver}-${_beta_release}_${_arch}.tar.gz/download"
