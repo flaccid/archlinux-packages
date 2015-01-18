@@ -1,0 +1,81 @@
+# $Id$
+# Maintainer: Chris Fordham <chris at fordham-nagy dot id dot au> aka flaccid
+# Package Build Source: https://github.com/flaccid/archlinux-packages/blob/master/omnibus-chefdk/PKGBUILD
+
+# omnibus-chef (FPM) uses directories under system locations such as /opt and /var,
+#     making user builds a pain for non-root users!
+#
+# directories that need permission for the user running makepkg:
+# /opt/chefdk
+# /var/cache/omnibus
+
+# Change the log level:
+# CHEF_LOG_LEVEL=debug makepkg -s
+
+pkgname=omnibus-chefdk
+_pkgver=chef-12.0.3
+pkgver=0.3.6
+_chefver=11.18.0
+pkgrel=1
+pkgdesc="Omnibus packaging for Chef DK (provides a Makeself installer for Chef DK $_chefver)."
+arch=(any)
+url="https://github.com/opscode/chef-dk"
+license=('Apache 2.0')
+install="$pkgname.install"
+makedepends=(git ruby-bundler)
+conflicts=(omnibus-chef-git)
+replaces=(omnibus-chef-git)
+source=("https://github.com/opscode/omnibus-chef/archive/$_pkgver.tar.gz")
+md5sums=('4932b8675f3c83baa83cd5386b469f1f')
+#md5sums=('1341f3b95c3a4d6913b772d5a6ae60ab') chef-11
+
+: "${CHEF_LOG_LEVEL:=error}"
+
+pkgver() {
+  echo "$pkgver"
+}
+
+prepare() {
+  msg 'Initialising system chef directories.'
+  mkdir -p /opt/chefdk /var/cache/omnibus
+  rm -Rf /opt/chefdk/* /var/cache/omnibus/*
+
+  pushd "$srcdir/omnibus-chef-$_pkgver"
+    msg 'Removing any existing built makeself installers.'
+    rm -Rf "pkg/chefdk-$_pkgver"*.run
+
+    msg 'Preparing bundle...'
+
+    msg 'Installing required gems...'
+    bundle install --without development
+    [ "$CHEF_LOG_LEVEL" = 'debug' ] && bundle show --paths
+
+    msg 'Cleaning temporary files...'
+    bundle exec omnibus clean chefdk
+  popd
+
+  # why is this needed?! (use the system's bundler)
+  mkdir -p /opt/chef/embedded/bin
+  ln -svf /usr/bin/bundle /opt/chef/embedded/bin/bundle
+}
+
+build() {
+  pushd "$srcdir/omnibus-chef-$_pkgver"
+    msg "Building omnibus chefdk"
+    if [[ "$CHEF_LOG_LEVEL" =~ ^(error|warning)$ ]]; then
+      echo '(please be patient)'
+    fi
+    bundle exec omnibus build chefdk -l "$CHEF_LOG_LEVEL"
+  popd
+}
+
+package() {
+  install -m755 -d "$pkgdir/usr/local/sbin"
+  cp -v "$srcdir/$pkgname-$_pkgver/pkg/chef-$CHEF_VERSION"*.run "$pkgdir/usr/local/sbin/"
+  for chef_installer in "$pkgdir/usr/local/sbin/chef-"*; do break; done
+  pushd "$pkgdir/usr/local/sbin"
+    ln -sv ./"$(basename $chef_installer)" ./chefdk-installer
+  popd
+}
+
+# vim:set ts= 2 sw=2 Et:
