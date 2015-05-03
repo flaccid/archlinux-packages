@@ -52,4 +52,9 @@ post_upgrade() {
 	echo "systemctl restart rightlink.service"
 }
 
+post_remove() {
+  systemctl disable rightlink > /dev/null 2>&1 || true
+  systemctl stop rightlink > /dev/null 2>&1 || true
+}
+
 # vim:set ts=2 sw=2 et:

@@ -4,9 +4,9 @@
 pkgname=rightlink-bin
 _pkgname=rightlink
 pkgver='10.0.rc4'
-pkgrel=1
+pkgrel=2
 pkgdesc="RightLink version 10 (RL10) is a new version of RightScale's server agent that connects servers managed through RightScale to the RightScale cloud management platform."
-license=('MIT')
+license=('RightScale')
 arch=('x86_64')
 depends=('cloud-init')
 provides=('rightlink')
