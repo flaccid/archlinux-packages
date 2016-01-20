@@ -41,9 +41,11 @@ pkgver() {
 prepare() {
   msg 'Initialising system chef directories.'
   # need root :(
-  [ ! -e /opt/chef ] && mkdir -p /opt/chef
-  [ ! -e /var/cache/omnibus ] && mkdir -p /var/cache/omnibus
-  rm -Rf /opt/chef/* /var/cache/omnibus/*
+  [ ! -e /opt/chef ] && sudo mkdir -p /opt/chef
+  [ ! -e /var/cache/omnibus ] && sudo mkdir -p /var/cache/omnibus
+  sudo chown "$(whoami)" /opt/chef
+  sudo chown "$(whoami)" /var/cache/omnibus
+  sudo rm -Rf /opt/chef/* /var/cache/omnibus/*
 
   pushd "$srcdir/$pkgname-$_pkgver"
     msg 'Removing any existing built makeself installers.'
