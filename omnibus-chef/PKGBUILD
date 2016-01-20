@@ -16,9 +16,9 @@
 # CHEF_LOG_LEVEL=debug makepkg -s
 
 pkgname=omnibus-chef
-_pkgver=chef-12.0.3
-pkgver=12.0.3
-_chefver=12.0.3
+_pkgver=chef-12.6.0
+pkgver=12.6.0
+_chefver=12.6.0
 pkgrel=1
 pkgdesc="Omnibus packaging for Chef (provides a Makeself installer for Chef $_chefver)."
 arch=(any)
@@ -29,7 +29,7 @@ makedepends=(git ruby-bundler)
 conflicts=(omnibus-chef-git)
 replaces=(omnibus-chef-git)
 source=("https://github.com/opscode/$pkgname/archive/$_pkgver.tar.gz")
-md5sums=('4932b8675f3c83baa83cd5386b469f1f')
+md5sums=('a502a8e9024515a00c150f221a656f73')
 
 : "${CHEF_VERSION:=$_chefver}"
 : "${CHEF_LOG_LEVEL:=error}"
@@ -40,7 +40,9 @@ pkgver() {
 
 prepare() {
   msg 'Initialising system chef directories.'
-  mkdir -p /opt/chef /var/cache/omnibus
+  # need root :(
+  [ ! -e /opt/chef ] && mkdir -p /opt/chef
+  [ ! -e /var/cache/omnibus ] && mkdir -p /var/cache/omnibus
   rm -Rf /opt/chef/* /var/cache/omnibus/*
 
   pushd "$srcdir/$pkgname-$_pkgver"
@@ -65,7 +67,7 @@ prepare() {
 }
 
 build() {
-  pushd "$srcdir/$pkgname-$_pkgver"
+  pushd "$srcdir/$pkgname-$_pkgver" 
     msg "Building omnibus chef (version $CHEF_VERSION)..."
     if [[ "$CHEF_LOG_LEVEL" =~ ^(error|warning)$ ]]; then
       echo '(please be patient)'
