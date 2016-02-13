@@ -3,9 +3,17 @@ enable_start_service() {
   systemctl start rightlink --no-block
 }
 
+add_rightlink_user() {
+  if ! id -u rightlink >/dev/null 2>&1; then
+    useradd -c "rightlink service" -m -d /home/rightlink -U -s /bin/false rightlink
+  fi
+}
+
 post_any() {
   touch /var/lib/rightscale-identity
   chmod 0600 /var/lib/rightscale-identity
+
+  add_rightlink_user
 
   useradd -c "RightScale Managed Login" -d /home/rightscale -s /bin/bash -m rightscale &>/dev/null
 
@@ -34,10 +42,10 @@ post_any() {
   echo '      (see the User Data field on the Info tab of your server)'
   echo
 	echo "==> To enable the RightScale RightLink service:"
-	echo "systemctl enable rightlink.service"
+	echo "# systemctl enable rightlink.service"
 	echo
 	echo "==> To start RightScale RightLink:"
-	echo "systemctl start rightlink.service"
+	echo "# systemctl start rightlink.service"
 }
 
 post_install() {
@@ -49,7 +57,7 @@ post_upgrade() {
   post_any
   echo
   echo "==> To restart RightScale RightLink with the new version (when upgrading):"
-	echo "systemctl restart rightlink.service"
+	echo "# systemctl restart rightlink.service"
 }
 
 post_remove() {
