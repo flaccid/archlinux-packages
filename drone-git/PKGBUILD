@@ -40,9 +40,9 @@ prepare() {
 
   # install go dependencies manually
   msg2 'installing go dependencies'
-  go get github.com/drone/drone-ui/dist
-  go get github.com/golang/protobuf/proto
-  go get golang.org/x/net/context
+  pushd "$GOPATH/src/github.com/drone/drone" >/dev/null
+    go get ./...
+  popd
 }
 
 build() {
