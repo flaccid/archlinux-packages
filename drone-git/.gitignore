@@ -1,0 +1,4 @@
+/pkg/
+/src/
+/drone/
+*.tar.xz
