@@ -1,0 +1,50 @@
+# $Id$
+# Maintainer: Chris Fordham <chris at fordham dot id dot au> aka flaccid
+# Contributor: Sparadox <etienne.lafarge at gmail.com>
+# Contributor: kpcyrd <git@rxv.cc>
+# Contributor: Jonathan Steel <jsteel at archlinux.org>
+# Contributor: Daniel Wallace <danielwallace at gtmanfred dot com>
+
+pkgname=cloud-init
+pkgver=19.1
+pkgrel=1
+pkgdesc="The standard for customising cloud instances"
+arch=('any')
+url="https://cloud-init.io"
+license=('GPL3')
+depends=('dhclient'
+         'net-tools'
+         'python-oauthlib'
+         'python-cheetah'
+         'python-prettytable'
+         'python-boto'
+         'python-jsonpointer'
+         'python-argparse'
+         'python-jinja'
+         'python-configobj'
+         'python-yaml'
+         'python-requests'
+         'python-jsonpatch'
+         'python-jsonschema'
+         'python-six'
+         'sudo'
+)
+makedepends=('python' 'python-setuptools' 'pkgconf' 'patch')
+backup=('etc/cloud/cloud.cfg' 'etc/cloud/cloud.cfg.d/05_logging.cfg')
+source=("https://github.com/$pkgname/$pkgname/archive/$pkgver.tar.gz")
+sha256sums=('802207fb7705d15f2323229f5cc8aa09a88382ad8611dd853880b3a5549a27e6')
+
+prepare(){
+  pushd "$pkgname-$pkgver" >/dev/null
+    patch -Np1 -i "$startdir/fix-lib.patch"
+    sed -e 's:/etc/systemd:/usr/lib/systemd:g' -e 's:\"/lib\":\"/usr/lib\":g' -i setup.py
+  popd
+}
+
+package() {
+  pushd "$pkgname-$pkgver" >/dev/null
+    python ./setup.py install --root="$pkgdir" --init-system systemd
+  popd
+
+  install -m644 "$startdir/archlinux.cloud.cfg" "$pkgdir"/etc/cloud/cloud.cfg
+}
